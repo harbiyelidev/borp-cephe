@@ -84,6 +84,7 @@ RegisterNetEvent('borp-cephe:server:cephekatil', function(_, locationData)
    local Player = QBCore.Functions.GetPlayer(src)
 
    if Player then
+      if not InGame[src] or not IsGameStarted then return end
       for k, v in pairs(locationData.items) do
          Player.Functions.AddItem(v.name, v.amount)
       end
