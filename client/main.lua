@@ -6,16 +6,14 @@ local InGame = false
 function GetClosestLocation(playerCoords, locations)
    local closestLocation = nil
    local closestDistance = nil
-   local locationData = nil
    for k, v in pairs(locations) do
       local distance = #(playerCoords - v.coords)
       if not closestDistance or (distance < closestDistance and distance < v.radius) then
          closestDistance = distance
          closestLocation = k
-         locationData = v
       end
    end
-   return closestLocation, locationData
+   return closestLocation
 end
 
 RegisterNetEvent('borp-cephe:client:cephebaslat', function()
@@ -33,11 +31,11 @@ RegisterNetEvent('borp-cephe:client:cephekatil', function()
 
    local ped = PlayerPedId()
    local playerCoords = GetEntityCoords(ped)
-   local closestLocation, locationData = GetClosestLocation(playerCoords, Config.Locations)
+   local closestLocation = GetClosestLocation(playerCoords, Config.Locations)
 
    if closestLocation then
       InGame = true
-      TriggerServerEvent('borp-cephe:server:cephekatil', closestLocation, locationData)
+      TriggerServerEvent('borp-cephe:server:cephekatil', closestLocation)
    end
 end)
 
