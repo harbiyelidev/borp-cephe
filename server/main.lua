@@ -86,7 +86,7 @@ RegisterNetEvent('borp-cephe:server:cephekatil', function(locationName)
    if Player then
       if not InGame[src] or not IsGameStarted then return end
       for k, v in pairs(Config.Locations[locationName].items) do
-         Player.Functions.AddItem(v.name, v.amount)
+         exports.ox_inventory:AddItem(source, v.name, v.amount)
       end
    end
 end)
